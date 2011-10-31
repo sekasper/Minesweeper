@@ -1,0 +1,3156 @@
+<!DOCTYPE HTML>
+<html class=" js flexbox canvas canvastext no-webgl no-touch geolocation postmessage no-websqldatabase no-indexeddb hashchange no-history draganddrop no-websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity no-cssanimations csscolumns cssgradients no-cssreflections csstransforms no-csstransforms3d no-csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg no-inlinesvg no-smil svgclippaths mozilla"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Smart HTTP Support - GitHub</title>
+    <link rel="search" type="application/opensearchdescription+xml" href="https://github.com/opensearch.xml" title="GitHub">
+    <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
+
+    
+    
+
+    <meta content="authenticity_token" name="csrf-param">
+<meta content="dd30223e2dbf28234563c58bbb27b78fe556d2e3" name="csrf-token">
+
+    <link href="642-smart-http-support-Dateien/bundle_github.css" media="screen" rel="stylesheet" type="text/css">
+    
+
+    <script src="642-smart-http-support-Dateien/bundle_jquery.js" type="text/javascript"></script>
+    <script src="642-smart-http-support-Dateien/bundle_github.js" type="text/javascript"></script><script src="642-smart-http-support-Dateien/ga.js" async="" type="text/javascript"></script>
+    
+
+    
+  <link href="https://github.com/blog.atom" rel="alternate" title="The GitHub Blog" type="application/atom+xml">
+  <link href="https://github.com/blog/comments.atom" rel="alternate" title="GitHub Blog Comments" type="application/atom+xml">
+
+  </head><body class="logged_in  windows env-production ">
+    
+
+
+    
+
+    <div id="main">
+      <div id="header" class="true">
+          <a class="logo" href="https://github.com/">
+            <img alt="github" class="default svg" src="642-smart-http-support-Dateien/logov6.svg" height="45">
+            <img alt="github" class="default png" src="642-smart-http-support-Dateien/logov6.png" height="45">
+            <!--[if (gt IE 8)|!(IE)]><!-->
+            <img alt="github" class="hover svg" src="642-smart-http-support-Dateien/logov6-hover.svg" height="45">
+            <img alt="github" class="hover png" src="642-smart-http-support-Dateien/logov6-hover.png" height="45">
+            <!--<![endif]-->
+          </a>
+
+          
+
+
+    <div class="userbox">
+      <div class="avatarname">
+        <a href="https://github.com/sekasper"><img src="642-smart-http-support-Dateien/05c0644a6c32848cc9fcf20a47eda7d5.png" width="20" height="20"></a>
+        <a href="https://github.com/sekasper" class="name">sekasper</a>
+
+      </div>
+      <ul class="usernav">
+        <li><a href="https://github.com/">Dashboard</a></li>
+        <li>
+          <a href="https://github.com/inbox">Inbox</a>
+          <a href="https://github.com/inbox" class="unread_count ">0</a>
+        </li>
+        <li><a href="https://github.com/account">Account Settings</a></li>
+        <li><a href="https://github.com/logout">Log Out</a></li>
+      </ul>
+    </div><!-- /.userbox -->
+
+
+        <div class="topsearch">
+<form action="/search" id="top_search_form" method="get">      <a href="https://github.com/search" class="advanced-search tooltipped downwards" title="Advanced Search">Advanced Search</a>
+      <div class="search placeholder-field js-placeholder-field">
+        <label style="display: block;" class="placeholder" for="global-search-field">Search…</label>
+        <input autocomplete="off" class="search my_repos_autocompleter ac_input" id="global-search-field" name="q" results="5" type="text"> <input value="Search" class="button" type="submit">
+      </div>
+      <input name="type" value="Everything" type="hidden">
+      <input name="repo" value="" type="hidden">
+      <input name="langOverride" value="" type="hidden">
+      <input name="start_value" value="1" type="hidden">
+</form>    <ul class="nav">
+        <li class="explore"><a href="https://github.com/explore">Explore GitHub</a></li>
+        <li><a href="https://gist.github.com/">Gist</a></li>
+        <li><a href="https://github.com/blog">Blog</a></li>
+      <li><a href="http://help.github.com/">Help</a></li>
+    </ul>
+</div>
+
+      </div>
+
+      
+        <div class="site">
+          
+<div class="pagehead"><div id="posts">
+  <div class="list">
+    <ul>
+      <li class="hentry post" id="post_642">
+<h2><a href="https://github.com/blog/642-smart-http-support" class="reverse url entry-title" rel="bookmark">Smart HTTP Support</a> <small></small></h2>
+  <div class="meta">
+    <div class="who_when">
+      <img src="642-smart-http-support-Dateien/9375a9529679f1b42b567a640d775e7d.jpeg" width="16" height="16">
+      <span class="author vcard fn"><a href="https://github.com/schacon">schacon</a></span>
+      <span class="published" title="2010-04-22T08:11:07-07:00"><a href="https://github.com/blog/642-smart-http-support#comments">April 22, 2010</a></span>
+      
+    </div>
+    <div class="respond">
+      
+    </div>
+  </div>
+  <div class="entry-content">
+    <p>Git's HTTP protocol just upped it a few notches on the ol' IQ test.  As discussed in detail on the <a href="http://progit.org/2010/03/04/smart-http.html">Pro Git blog</a>,
+ Git supports a new, much more efficient HTTP based transport as of 
+version 1.6.6.  Well, now GitHub supports that new protocol as well.</p>
+
+<p>From now on, if you clone a repository over the <code>http://</code> 
+url and you are using a Git client version 1.6.6 or greater, Git will 
+automatically use the newer, better transport mechanism.  Even more 
+amazing, however, is that you can now push over that protocol and clone 
+private repositories as well.  If you access a private repository, or 
+you are a collaborator and want push access, you can put your username 
+in the URL and Git will prompt you for the password when you try to 
+access it.</p>
+
+<p>Try it out on a public repository:</p>
+
+<pre><code>$ git clone http://github.com/schacon/grack.git
+</code></pre>
+
+<p>For private repos, or to have push access on your repository, you can clone this way:</p>
+
+<pre><code>$ git clone https://username@github.com/username/project.git
+</code></pre>
+
+<p>Don't forget the <code>https</code> part - Git will send your 
+password hashed but unencrypted over the wire, so be sure to use SSL.  
+In future versions of Git (assuming our patch gets integrated), Git will
+ prompt you for your username if it's not provided and the client gets a
+ 401, so you won't actually have to put your username in the URL - it 
+will just ask you when Git needs it.</p>
+
+<p>Older clients will also fall back to the older, less efficient way, 
+so nothing should break - just newer clients should work better.</p>
+
+<p>Let us know if you have any problems with it, and enjoy!</p>
+  </div>
+</li>
+
+      <h3>78 Comments</h3>
+      <div id="comments" class="new-comments blog-comments">
+          
+<div id="comment-7402" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/b7951205f50c604cbed7030607ea99aa.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/thommay">thommay</a></strong>
+      <em class="action-text">
+        <a href="#comment-7402">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7402"><time class="js-relative-date" datetime="2010-04-22T08:33:58-07:00" title="2010-04-22 08:33:58">April 22, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>This is brilliant - no more socks proxy hacks to get through the firewall at work! So fast, too!</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7403" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/a0cc4d1c55ee3ae48437c4e7774355b7.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/koraktor">koraktor</a></strong>
+      <em class="action-text">
+        <a href="#comment-7403">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7403"><time class="js-relative-date" datetime="2010-04-22T08:36:07-07:00" title="2010-04-22 08:36:07">April 22, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>Sounds great, no need to use weird SSH proxy settings at work anymore. ;)</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7404" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/c020aeae684d0e137d1da9d3ac3fda17.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/jrockway">jrockway</a></strong>
+      <em class="action-text">
+        <a href="#comment-7404">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7404"><time class="js-relative-date" datetime="2010-04-22T09:38:51-07:00" title="2010-04-22 09:38:51">April 22, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>Same as above; now I can push from work without getting an email saying I am going to be fired for using SSH :)</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7405" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/dd3e689323b8e39b1c4efb43b5ca25c5.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/andreisavu">andreisavu</a></strong>
+      <em class="action-text">
+        <a href="#comment-7405">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7405"><time class="js-relative-date" datetime="2010-04-22T09:48:19-07:00" title="2010-04-22 09:48:19">April 22, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>Awesome! I was just thinking about this today. Déjà vu feeling.</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7406" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/651a0248090dbc8c4aaf431af7d6e28e.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/sullivant">sullivant</a></strong>
+      <em class="action-text">
+        <a href="#comment-7406">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7406"><time class="js-relative-date" datetime="2010-04-22T10:08:17-07:00" title="2010-04-22 10:08:17">April 22, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>I <em>love</em> it, for all the "wrong" reasons!  Great job, guys!</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7407" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/2eccc4005572c1e2b12a9c00580bc86f.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/kennethreitz">kennethreitz</a></strong>
+      <em class="action-text">
+        <a href="#comment-7407">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7407"><time class="js-relative-date" datetime="2010-04-22T10:13:26-07:00" title="2010-04-22 10:13:26">April 22, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>This is awesome! Now I can push to my private git repos behind my company firewall haha.</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7408" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/9f9dccc76be3f92beef95c50f2c646c4.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/codification">codification</a></strong>
+      <em class="action-text">
+        <a href="#comment-7408">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7408"><time class="js-relative-date" datetime="2010-04-22T10:14:51-07:00" title="2010-04-22 10:14:51">April 22, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>Excellent, one of the reasons I have favored other collaboration sites until now is the missing "HTTP Push". Great work!</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7409" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/9663190a288f4ca0d12276f9fb6b884d.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/HusseinMorsy">HusseinMorsy</a></strong>
+      <em class="action-text">
+        <a href="#comment-7409">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7409"><time class="js-relative-date" datetime="2010-04-22T10:58:31-07:00" title="2010-04-22 10:58:31">April 22, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>Every time I pull or push 
+over https git will prompt for the password .Is it possible, that git  
+remembers the password ? I would like to use https for the servers</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7410" class="comment blog-comment github-staff-tag">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/9375a9529679f1b42b567a640d775e7d.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/schacon">schacon</a></strong>
+      <em class="action-text">
+        <a href="#comment-7410">
+        commented
+        </a>
+      </em>
+        <span class="tag">github staff</span>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7410"><time class="js-relative-date" datetime="2010-04-22T10:59:38-07:00" title="2010-04-22 10:59:38">April 22, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p><a href="https://github.com/HusseinMorsy" class="user-mention">@HusseinMorsy</a> - Git will look at your .netrc file, so if you set your password in there it will use it every time</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7411" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/57332d67a86eb51e06bf78d2baf42c3c.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/avar">avar</a></strong>
+      <em class="action-text">
+        <a href="#comment-7411">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7411"><time class="js-relative-date" datetime="2010-04-22T11:12:03-07:00" title="2010-04-22 11:12:03">April 22, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>When I clone <a href="https://github.com/mirrors/perl">the perl mirror</a> from GitHub it takes 1m03s with HTTP and 52s with the Git protocol. The same clone from <a href="http://perl5.git.perl.org/perl.git">perl5's own repository</a> which uses the old HTTP backend takes 4m45s with HTTP and 57s with the Git protocol.</p>
+
+<p>Aside from allowing commits behind anal firewalls this is a huge improvement in speed.</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7412" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/f844ff598976264471948bea939b633c.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/enriquez">enriquez</a></strong>
+      <em class="action-text">
+        <a href="#comment-7412">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7412"><time class="js-relative-date" datetime="2010-04-22T11:22:16-07:00" title="2010-04-22 11:22:16">April 22, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>Do submodules work, or is this problem unique to me:<br>
+    &gt; git submodule init<br>
+    No submodule mapping found in .gitmodules for path ...</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7413" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/f805ea30351fc02abb2544c6ad90b072.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/rishid">rishid</a></strong>
+      <em class="action-text">
+        <a href="#comment-7413">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7413"><time class="js-relative-date" datetime="2010-04-22T12:04:41-07:00" title="2010-04-22 12:04:41">April 22, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>Is this working for people?  It prompted me for my password, I entered it, and it just hangs there forever.</p>
+
+<p>I can clone just fine via with http:// url so I know my proxy settings are working.  Using Git version 1.7.0.5</p>
+
+<p>Edit: just to follow up, I was able to get it working.  I needed to 
+set https_proxy variable, didn't realize there was a special one for 
+https connection.  Hope this helps someone.</p>
+
+<p>Thanks github I can finally use github from work!</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7414" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/57332d67a86eb51e06bf78d2baf42c3c.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/avar">avar</a></strong>
+      <em class="action-text">
+        <a href="#comment-7414">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7414"><time class="js-relative-date" datetime="2010-04-22T12:09:40-07:00" title="2010-04-22 12:09:40">April 22, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>Works for me, I just <a href="https://github.com/avar/snerp-vortex/compare/avar/mediawiki-hacks">pushed this</a> via <code>https://</code>
+ on a virtual machine where I'd been debugging things. It's not 
+firewalled but HTTP push saved me from setting up ssh keys for a one-off
+ push.</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7415" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/2eccc4005572c1e2b12a9c00580bc86f.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/kennethreitz">kennethreitz</a></strong>
+      <em class="action-text">
+        <a href="#comment-7415">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7415"><time class="js-relative-date" datetime="2010-04-22T12:35:18-07:00" title="2010-04-22 12:35:18">April 22, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>is this best practice vs the <code>git://</code> protocol??</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7416" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/faad82522e2da7423a8ea3ac6df492f0.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/sl4m">sl4m</a></strong>
+      <em class="action-text">
+        <a href="#comment-7416">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7416"><time class="js-relative-date" datetime="2010-04-22T12:37:39-07:00" title="2010-04-22 12:37:39">April 22, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>Do I have to do anything different to clone user pages projects?  I'm having trouble.  Can anyone try cloning this:</p>
+
+<p><a href="https://github.com/mojombo/mojombo.github.com.git">http://github.com/mojombo/mojombo.github.com.git</a></p>
+
+<p>I receive:</p>
+
+<p>git clone <a href="https://github.com/mojombo/mojombo.github.com.git">http://github.com/mojombo/mojombo.github.com.git</a><br>
+Initialized empty Git repository in C:/xdata/p/git/mojombo.github.com/.git/<br>
+error: The requested URL returned error: 401 while accessing <a href="https://github.com/mojombo/mojombo.github.com.git/info/refs">http://github.com/mojombo/mojombo.github.com.git/info/refs</a></p>
+
+<p>fatal: HTTP request failed</p>
+
+<p>I'm running 1.7.0.2 msysgit on Windows</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7418" class="comment blog-comment github-staff-tag">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/495abe87ebbc36e70c8db98680ec8a46.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/tekkub">tekkub</a></strong>
+      <em class="action-text">
+        <a href="#comment-7418">
+        commented
+        </a>
+      </em>
+        <span class="tag">github staff</span>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7418"><time class="js-relative-date" datetime="2010-04-22T16:39:41-07:00" title="2010-04-22 16:39:41">April 23, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p><a href="https://github.com/kennethreitz" class="user-mention">@kennethreitz</a>  If <code>git://</code> and <code>git@</code>
+ work for you, stick with it.  The biggest thing this will help with are
+ people behind insane firewalls and windows users (especially tortoise 
+git).</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7419" class="comment blog-comment github-staff-tag">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/9375a9529679f1b42b567a640d775e7d.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/schacon">schacon</a></strong>
+      <em class="action-text">
+        <a href="#comment-7419">
+        commented
+        </a>
+      </em>
+        <span class="tag">github staff</span>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7419"><time class="js-relative-date" datetime="2010-04-22T16:57:23-07:00" title="2010-04-22 16:57:23">April 23, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>@slsim - iiiiiinteresting.  I'll have to check that out, that does seem to be a bug.</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7424" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/cda320b503d11deb5a6048dd3f19ca83.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/tekn0t">tekn0t</a></strong>
+      <em class="action-text">
+        <a href="#comment-7424">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7424"><time class="js-relative-date" datetime="2010-04-22T23:57:36-07:00" title="2010-04-22 23:57:36">April 23, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>I am also seeing problems with msysgit on Windows behind the corporate firewall of death:-</p>
+
+<p>$ git --version<br><br>
+git version 1.7.0.2.msysgit.0</p>
+
+<p>$ git clone <a href="https://github.com/tekn0t/privaterepo.git">https://tekn0t@github.com/tekn0t/privaterepo.git</a><br><br>
+Initialized empty Git repository in c:/projects/privaterepo/.git/<br><br>
+Password:<br><br>
+error: error setting certificate verify locations:<br><br>
+  CAfile: /bin/curl-ca-bundle.crt<br><br>
+  CApath: none<br><br>
+ while accessing <a href="https://github.com/tekn0t/privaterepo.git/info/refs">https://tekn0t@github.com/tekn0t/privaterepo.git/info/refs</a>  </p>
+
+<p>fatal: HTTP request failed  </p>
+
+<p>Works fine on my Ubuntu laptop at home.  </p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7425" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/e635761f0e8fd1c0a8f337327427ecb3.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/shadowhand">shadowhand</a></strong>
+      <em class="action-text">
+        <a href="#comment-7425">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7425"><time class="js-relative-date" datetime="2010-04-23T00:43:55-07:00" title="2010-04-23 00:43:55">April 23, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>This is excellent news. Thanks for being so proactive about keeping up with git features!</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7426" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/1be0e66acad91bff8dfe8618629f18c8.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/mikola">mikola</a></strong>
+      <em class="action-text">
+        <a href="#comment-7426">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7426"><time class="js-relative-date" datetime="2010-04-23T02:34:30-07:00" title="2010-04-23 02:34:30">April 23, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>@teknot Got the same error on Windows though I'm not behind firewall. </p>
+<blockquote>
+<p>git --version</p>
+</blockquote>
+<p>git version 1.7.0.2.msysgit.0</p>
+<blockquote>
+<p>git clone <a href="https://github.com/mikola/openmind.git">https://mikola@github.com/mikola/openmind.git</a></p>
+</blockquote>
+<p>Initialized empty Git repository in D:/gitwork/openmind/.git/<br>
+Password:<br>
+error: error setting certificate verify locations:<br>
+  CAfile: /bin/curl-ca-bundle.crt<br>
+  CApath: none<br>
+ while accessing <a href="https://github.com/mikola/openmind.git/info/refs">https://mikola@github.com/mikola/openmind.git/info/refs</a></p>
+
+<p>fatal: HTTP request failed</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7427" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/a594958f387417f933a3105ad0cde7b5.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/i5m">i5m</a></strong>
+      <em class="action-text">
+        <a href="#comment-7427">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7427"><time class="js-relative-date" datetime="2010-04-23T04:41:16-07:00" title="2010-04-23 04:41:16">April 23, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>I tried creating a new repository and pushing to it:</p>
+
+<pre><code>git remote add origin https://i5m@github.com/i5m/temp-test-smart-http-transport.git
+git push origin master
+</code></pre>
+
+<p>I got prompted for my password, but then got:</p>
+
+<pre><code>Password:
+error: Couldn't resolve host 'github.com' while accessing https://i5m@github.com/i5m/temp-test-smart-http-transport.git/info/refs
+
+fatal: HTTP request failed
+</code></pre>
+
+<p>On windows XP and behind a jolly corporate firewall. I have HTTP_PROXY set. Msysgit 1.7.0.2.</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7428" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/7eee72fadf902fea8a0c55b6c2e79111.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/anodyne">anodyne</a></strong>
+      <em class="action-text">
+        <a href="#comment-7428">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7428"><time class="js-relative-date" datetime="2010-04-23T05:26:08-07:00" title="2010-04-23 05:26:08">April 23, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>I can clone a public 
+repository I don't own over HTTP just fine, but when I try to clone a 
+repo that I own with HTTPS, it errors out:</p>
+
+<pre>error: Failed connect to github.com:443; No error while accessing https://anodyne@github.com/anodyne/anodyne-xtras.git/info/refs
+
+fatal: HTTP request failed</pre>
+
+<p>Any ideas?</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7429" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/651a0248090dbc8c4aaf431af7d6e28e.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/sullivant">sullivant</a></strong>
+      <em class="action-text">
+        <a href="#comment-7429">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7429"><time class="js-relative-date" datetime="2010-04-23T06:36:12-07:00" title="2010-04-23 06:36:12">April 23, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>I'd like to add in my 
+"ping" for that fatal HTTP request failed error, too.  When trying to 
+clone a repo over HTTPS for pushing, later.</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7433" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/ca7031d4ccdb00a0dd438cc274cc7e53.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/nzoschke">nzoschke</a></strong>
+      <em class="action-text">
+        <a href="#comment-7433">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7433"><time class="js-relative-date" datetime="2010-04-23T17:47:23-07:00" title="2010-04-23 17:47:23">April 24, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>Doesn't seem to work with all of the git pull arguments:</p>
+
+<p>$ git init<br>
+$ git pull --depth 1 <a href="https://github.com/schacon/grack.git">http://github.com/schacon/grack.git</a></p>
+
+<p>Hangs...</p>
+
+<p>$ git --version<br>
+git version 1.7.0.5</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7435" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/fb4eb861e88932b17b8bb5c31121d6f3.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/voltagex">voltagex</a></strong>
+      <em class="action-text">
+        <a href="#comment-7435">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7435"><time class="js-relative-date" datetime="2010-04-24T02:36:52-07:00" title="2010-04-24 02:36:52">April 24, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p><a href="https://github.com/schacon" class="user-mention">@schacon</a> Where's the patch you mentioned?</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7438" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/caf520e1699904e3854ec04a5b37247b.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/gvkalra">gvkalra</a></strong>
+      <em class="action-text">
+        <a href="#comment-7438">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7438"><time class="js-relative-date" datetime="2010-04-24T09:12:17-07:00" title="2010-04-24 09:12:17">April 24, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p><a href="https://github.com/tekn0t" class="user-mention">@tekn0t</a> ... I too am facing the same error on my windows machine</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7441" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/e4e04d046fb8a590419cc7759433b696.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/erikzaadi">erikzaadi</a></strong>
+      <em class="action-text">
+        <a href="#comment-7441">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7441"><time class="js-relative-date" datetime="2010-04-25T00:47:06-07:00" title="2010-04-25 00:47:06">April 25, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>Same error here  :(<br>
+error: error setting certificate verify locations:<br>
+  CAfile: /bin/curl-ca-bundle.crt<br>
+  CApath: none</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7442" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/f512db2d57900c3186cbe564211a7910.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/NeillAlexander">NeillAlexander</a></strong>
+      <em class="action-text">
+        <a href="#comment-7442">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7442"><time class="js-relative-date" datetime="2010-04-26T06:03:21-07:00" title="2010-04-26 06:03:21">April 26, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>I had lots of problems 
+trying to make this work on Windows behind firewall. With Cygwin git it 
+prompts for a password but doesn't accept the input for some reason.</p>
+
+<p>In the end I had to do the following:</p>
+
+<ul>
+<li>Install msysgit</li>
+<li>Set https_proxy environment variable (note https, not http)</li>
+<li>Set global git config option: http.sslverify=false</li>
+</ul><p>I was then able to clone using https url. Clearly having 
+http.sslverify=false isn't ideal so hopefully someone will know how to 
+fix the curl-ca-bundle.crt issue. I tried downloading the github cert 
+from Firefox and appending it to the end of the curl-ca-bundle.crt file,
+ but that didn't work. Could be that I'm using the wrong format when 
+appending?</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7443" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/651a0248090dbc8c4aaf431af7d6e28e.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/sullivant">sullivant</a></strong>
+      <em class="action-text">
+        <a href="#comment-7443">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7443"><time class="js-relative-date" datetime="2010-04-26T07:24:39-07:00" title="2010-04-26 07:24:39">April 26, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p><a href="https://github.com/NeillAlexander" class="user-mention">@NeillAlexander</a> - that works for me, too.  Interesting, but probably in the process of being repaired.  Thanks for the note!</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7444" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/f84dec4d81b73ba7fd576a51a82e6691.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/jamin4jc">jamin4jc</a></strong>
+      <em class="action-text">
+        <a href="#comment-7444">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7444"><time class="js-relative-date" datetime="2010-04-26T09:01:49-07:00" title="2010-04-26 09:01:49">April 26, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>To use .netrc to save you from having to reenter your password, add the following lines:</p>
+
+<pre><code> machine github.com
+ login your_github_login
+ password your_password
+</code></pre>
+
+<p>Then when you are cloning a repo, for instance:<br><a href="https://github.com/your_github_login/gitrepo.git">https://your_github_login@github.com/your_github_login/gitrepo.git</a></p>
+
+<p>Instead remove the initial username, so the clone looks like this<br>
+     git clone <a href="https://github.com/your_github_login/gitrepo.git">https://github.com/your_github_login/gitrepo.git</a></p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7445" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/faad82522e2da7423a8ea3ac6df492f0.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/sl4m">sl4m</a></strong>
+      <em class="action-text">
+        <a href="#comment-7445">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7445"><time class="js-relative-date" datetime="2010-04-26T12:47:06-07:00" title="2010-04-26 12:47:06">April 26, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p><a href="https://github.com/NeillAlexander" class="user-mention">@NeillAlexander</a>: have you tried pushing changes to github with your setup?</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7447" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/e9ea576a3921fb634f7f6112f2b6b145.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/onefang">onefang</a></strong>
+      <em class="action-text">
+        <a href="#comment-7447">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7447"><time class="js-relative-date" datetime="2010-04-27T04:41:42-07:00" title="2010-04-27 04:41:42">April 27, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>git version 1.6.3.3, which is the version that comes with the current Ubuntu 9.10 release.</p>
+
+<p>I'm running this script a few times -</p>
+
+<pre><code>#!/bin/bash 
+
+git clone git@github.com:CasperWarden/Meta7-Viewer.git ssh_meta7
+git clone http://github.com/CasperWarden/Meta7-Viewer.git http_meta7
+git clone git://github.com/CasperWarden/Meta7-Viewer.git git_meta7
+git clone http://github.com/jacek/imprudence.git http_imprudence
+git clone git://github.com/jacek/imprudence.git git_imprudence
+git clone http://github.com/realXtend/naali.git http_naali
+git clone git://github.com/realXtend/naali.git git_naali
+git clone http://github.com/realXtend/taiga.git http_taiga
+git clone git://github.com/realXtend/taiga.git git_taiga
+git clone http://github.com/Boy/rainbow.git http_rainbow
+git clone git://github.com/Boy/rainbow.git git_rainbow
+</code></pre>
+
+<p>The casper one is the only one I have ssh access to.  Most of the 
+time the http:// ones download some data, then timeout with an error.  
+The rainbow one is the only one to ever complete, sometimes.  The git://
+ ones give me a clone with modified files, usually pages of them, when I
+ do a git status straight after, sometimes.  The ssh one works fine.</p>
+
+<p>The rainbow one always has modified files in the fresh clone, so might just be something wrong with that repo.</p>
+
+<p>So the support of older clients is broken, and the rainbow repo may 
+or may not also be broken.  Strange that the only one that works with 
+http:// is the possibly broken repo, so my money is on http:// and 
+git:// being broken in all cases for old clients. </p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7449" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/e9ea576a3921fb634f7f6112f2b6b145.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/onefang">onefang</a></strong>
+      <em class="action-text">
+        <a href="#comment-7449">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7449"><time class="js-relative-date" datetime="2010-04-27T05:51:30-07:00" title="2010-04-27 05:51:30">April 27, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p><a href="https://launchpad.net/%7Egit-core/+archive/ppa">https://launchpad.net/~git-core/+archive/ppa</a>
+ (1.7.1 git release) helped a bit.  The http:// clones are working now. 
+ Still getting modified files in the fresh clones of rainbow and 
+impudence.  The list of modified files is different each time.</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7452" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/22410df51a60727958db46916629d9a6.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/CR34M3">CR34M3</a></strong>
+      <em class="action-text">
+        <a href="#comment-7452">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7452"><time class="js-relative-date" datetime="2010-04-29T02:33:50-07:00" title="2010-04-29 02:33:50">April 29, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>I'm new to git and would 
+really like to push over HTTPS at work (currently using SSH at home). I 
+changed the origin of my repo to <a href="https://github.com/CR34M3/Optimised_MPC_constraints__Code.git">https://CR34M3@github.com/CR34M3/Optimised_MPC_constraints__Code.git</a>
+ and then just 'git push --all origin' in bash (I'm running Ubuntu 
+9.10). I get prompted for my password, enter it and after a minute or so
+ I get "error: Cannot access URL <a href="https://github.com/CR34M3/Optimised_MPC_constraints__Code.git/">https://CR34M3@github.com/CR34M3/Optimised_MPC_constraints__Code.git/</a>, return code 7"</p>
+
+<p>Am I simply doing it wrong or does HTTPS not work for public repos like mine?</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7453" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/9ba11f732b6bdc4333ed60a9c2384d85.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/terasa">terasa</a></strong>
+      <em class="action-text">
+        <a href="#comment-7453">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7453"><time class="js-relative-date" datetime="2010-04-29T06:48:11-07:00" title="2010-04-29 06:48:11">April 29, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>i try to use http auth on 
+windows (git 1.7.0.2) to pull same changes on server. after type command
+ pull and write pass i got fatal: HTTP request failed. can samebody help
+ me?</p>
+
+<pre><code>         $git remote add origin https://terasa@github.com/terasa/newRepo.git
+         $git pull origin master
+         Password:
+         error: error seting certificate verify locations:
+                   CAfile /bin/curl-ca-bundle.crt
+                   CApath: none
+           while accessing https://terasa@github.com/terasa/newRepo.git/info/refs
+
+    fatal: HTTP request failed
+</code></pre></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7475" class="comment blog-comment github-staff-tag">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/9375a9529679f1b42b567a640d775e7d.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/schacon">schacon</a></strong>
+      <em class="action-text">
+        <a href="#comment-7475">
+        commented
+        </a>
+      </em>
+        <span class="tag">github staff</span>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7475"><time class="js-relative-date" datetime="2010-05-03T08:11:10-07:00" title="2010-05-03 08:11:10">May 03, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p><a href="https://github.com/gcristian" class="user-mention">@gcristian</a> - you need to use the <a href="mailto:username@github.com">username@github.com</a>
+ url - are you doing that?  if you are, it should prompt you 
+immediately.  1.6.3 won't work at all - it was stated that you need at 
+least 1.6.6, but it would probably be better if you had 1.7</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7478" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/3f533296d128037c9af8381221f78dd6.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/NotMyself">NotMyself</a></strong>
+      <em class="action-text">
+        <a href="#comment-7478">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7478"><time class="js-relative-date" datetime="2010-05-03T10:45:40-07:00" title="2010-05-03 10:45:40">May 03, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>I was able to successfully
+ get this to work on windows with the latest version of msysgit by 
+setting enviroment variables for http_proxy and https_proxy and adding  
+"git\cmd\" to my path.</p>
+
+<p>My current powershell user profile has this at the top:<br>
+//add dev environemnt to path</p>
+
+<p>$env:path = $env:path + ";c:\ironruby\bin\;c:\ironruby\lib\ironruby\gems\1.8\bin\;C:\Program Files\Git\cmd\"</p>
+
+<p>//set up proxy server</p>
+
+<p>$env:http_proxy = "<a href="http://proxy1.somecompany.com:8080/">http://proxy1.somecompany.com:8080</a>"</p>
+
+<p>$env:https_proxy = "<a href="http://proxy1.somecompany.com:8080/">http://proxy1.somecompany.com:8080</a>"</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7479" class="comment blog-comment github-staff-tag">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/9375a9529679f1b42b567a640d775e7d.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/schacon">schacon</a></strong>
+      <em class="action-text">
+        <a href="#comment-7479">
+        commented
+        </a>
+      </em>
+        <span class="tag">github staff</span>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7479"><time class="js-relative-date" datetime="2010-05-03T10:57:45-07:00" title="2010-05-03 10:57:45">May 03, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>i'm not sure setting up a 
+https proxy is a smart thing to do - does that unencrypt traffic before 
+it sends it to github?  if so, you're basically sending your password in
+ plaintext to us - which you don't want to do.</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7481" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/6a69d8c12aadd1052a5a65cb9023e783.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/fschwiet">fschwiet</a></strong>
+      <em class="action-text">
+        <a href="#comment-7481">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7481"><time class="js-relative-date" datetime="2010-05-03T19:52:19-07:00" title="2010-05-03 19:52:19">May 04, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>Just today I had given up 
+on getting ssh to work on windows behind a corporate firewall.  I'd set 
+up an http proxy so I could I could at least clone.  So now I find out I
+ can push!</p>
+
+<p>If you are having trouble with a proxy that requires windows authentication (NTLM/Negotiate) you can use this http proxy <a href="http://ntlmaps.sourceforge.net/">http://ntlmaps.sourceforge.net/</a>.  It runs from the command line, and can be setup to prompt for your password each time you start it.</p>
+
+<p>You can then configure git to use your proxy:</p>
+
+<p>git config --global http.proxy <a href="http://localhost:5865/">http://localhost:5865</a></p>
+
+<p>(<a href="http://stackoverflow.com/questions/1783659/does-git-clone-work-through-ntlm-proxies">http://stackoverflow.com/questions/1783659/does-git-clone-work-through-ntlm-proxies</a>)</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7482" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/3f533296d128037c9af8381221f78dd6.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/NotMyself">NotMyself</a></strong>
+      <em class="action-text">
+        <a href="#comment-7482">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7482"><time class="js-relative-date" datetime="2010-05-04T05:58:25-07:00" title="2010-05-04 05:58:25">May 04, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p><a href="https://github.com/schacon" class="user-mention">@schacon</a></p>
+
+<p>I don't think it does, this is basically the way our corporate IT sets up IE for all external connections. I'll check though.</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7483" class="comment blog-comment github-staff-tag">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/9375a9529679f1b42b567a640d775e7d.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/schacon">schacon</a></strong>
+      <em class="action-text">
+        <a href="#comment-7483">
+        commented
+        </a>
+      </em>
+        <span class="tag">github staff</span>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7483"><time class="js-relative-date" datetime="2010-05-04T06:12:48-07:00" title="2010-05-04 06:12:48">May 04, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p><a href="https://github.com/NotMyself" class="user-mention">@NotMyself</a> - sweet.  I just have no idea how Windows anything works.  Thanks.</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7484" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/faad82522e2da7423a8ea3ac6df492f0.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/sl4m">sl4m</a></strong>
+      <em class="action-text">
+        <a href="#comment-7484">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7484"><time class="js-relative-date" datetime="2010-05-04T09:46:39-07:00" title="2010-05-04 09:46:39">May 04, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p><a href="https://github.com/schacon" class="user-mention">@schacon</a>: I can't tell if Smart HTTP support issues are resolved?  I'm still unable to git clone read-only and read-write URLs</p>
+
+<p>git clone <a href="https://github.com/sl4m/sl4m.github.com.git">http://github.com/sl4m/sl4m.github.com.git</a><br>
+Initialized empty Git repository in C:/xdata/p/git/sl4m.github.com/.git/<br>
+error: The requested URL returned error: 401 while accessing <a href="https://github.com/sl4m/sl4m.github.com.git/info/refs">http://github.com/sl4m/sl4m.github.com.git/info/refs</a></p>
+
+<p>fatal: HTTP request failed</p>
+
+<p>git clone <a href="https://github.com/sl4m/sl4m.github.com.git">https://sl4m@github.com/sl4m/sl4m.github.com.git</a><br>
+Initialized empty Git repository in C:/xdata/p/git/sl4m.github.com/.git/<br>
+Password:<br>
+error: error setting certificate verify locations:<br>
+  CAfile: /bin/curl-ca-bundle.crt<br>
+  CApath: none<br>
+ while accessing <a href="https://github.com/sl4m/sl4m.github.com.git/info/refs">https://sl4m@github.com/sl4m/sl4m.github.com.git/info/refs</a></p>
+
+<p>fatal: HTTP request failed</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7485" class="comment blog-comment github-staff-tag">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/9375a9529679f1b42b567a640d775e7d.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/schacon">schacon</a></strong>
+      <em class="action-text">
+        <a href="#comment-7485">
+        commented
+        </a>
+      </em>
+        <span class="tag">github staff</span>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7485"><time class="js-relative-date" datetime="2010-05-04T10:01:24-07:00" title="2010-05-04 10:01:24">May 04, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>there may be an issue with projects with dots in them.  i'll check it out.</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7487" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/faad82522e2da7423a8ea3ac6df492f0.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/sl4m">sl4m</a></strong>
+      <em class="action-text">
+        <a href="#comment-7487">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7487"><time class="js-relative-date" datetime="2010-05-04T13:21:17-07:00" title="2010-05-04 13:21:17">May 04, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>thank you</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7542" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/bec38d63650c8912b6ba9b557fb953b9.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/rdp">rdp</a></strong>
+      <em class="action-text">
+        <a href="#comment-7542">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7542"><time class="js-relative-date" datetime="2010-05-05T15:09:16-07:00" title="2010-05-05 15:09:16">May 06, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>Was getting the same windows based errors as the others</p>
+
+<p>(retracting previous comment)</p>
+
+<p>fix is either:</p>
+
+<p>$ git config --global http.sslverify false</p>
+
+<p>or</p>
+
+<p>copy C:\Program Files\Git\bin\curl-ca-bundle.crt to c:\bin\curl-ca-bundle.crt</p>
+
+<p>appears msysgit is setup incorrectly by default.</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7543" class="comment blog-comment github-staff-tag">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/9375a9529679f1b42b567a640d775e7d.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/schacon">schacon</a></strong>
+      <em class="action-text">
+        <a href="#comment-7543">
+        commented
+        </a>
+      </em>
+        <span class="tag">github staff</span>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7543"><time class="js-relative-date" datetime="2010-05-05T15:25:25-07:00" title="2010-05-05 15:25:25">May 06, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p><a href="https://github.com/rdp" class="user-mention">@rdp</a>
+ - please don't do that - i'm going to disable 401 prompting if it's not
+ over https soon, since i really don't want people stealing your code.</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7616" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/faad82522e2da7423a8ea3ac6df492f0.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/sl4m">sl4m</a></strong>
+      <em class="action-text">
+        <a href="#comment-7616">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7616"><time class="js-relative-date" datetime="2010-05-11T12:12:57-07:00" title="2010-05-11 12:12:57">May 11, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>to <a href="https://github.com/rdp" class="user-mention">@rdp</a> and others seeing the issue:</p>
+
+<p>error: error setting certificate verify locations:<br>
+CAfile: /bin/curl-ca-bundle.crt CApath</p>
+
+<p>I messed around with the git config settings and found out it's 
+because the forward slashes should be backslashes.  There could also be 
+problems with spaces in names like Program Files folder.</p>
+
+<p>I have my git install in a different location (without spaces in names) and changed the following:</p>
+
+<p>git config --system http.sslcainfo \bin\curl-ca-bundle.crt</p>
+
+<p>The error message no longer appears, however, I still seem to have a 
+problem with repo names that include periods.  This should work for repo
+ names without periods.</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7647" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/bd660a30bb64b1f82c198bb2aae1e85c.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/eprofilerau">eprofilerau</a></strong>
+      <em class="action-text">
+        <a href="#comment-7647">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7647"><time class="js-relative-date" datetime="2010-05-15T03:03:06-07:00" title="2010-05-15 03:03:06">May 15, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>sounds great :) thanks man</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7659" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/bec38d63650c8912b6ba9b557fb953b9.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/rdp">rdp</a></strong>
+      <em class="action-text">
+        <a href="#comment-7659">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7659"><time class="js-relative-date" datetime="2010-05-19T08:47:14-07:00" title="2010-05-19 08:47:14">May 19, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>Thanks for doing this.  
+With the "old" http way jruby (and some others) didn't clone right.  Now
+ they do.  One less thing for me to worry about... :)</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7660" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/81fe1b2ea624031f9fbfd8b874196186.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/dvdotsenko">dvdotsenko</a></strong>
+      <em class="action-text">
+        <a href="#comment-7660">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7660"><time class="js-relative-date" datetime="2010-05-19T15:59:25-07:00" title="2010-05-19 15:59:25">May 20, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>Just a note for Windows users:</p>
+
+<p>Cygwin Git will not be able to ask you for a password - the way 
+vanilla git asks for input on console does not jive with Windows. One 
+way to go around that is to store the password for "origin" in the 
+actual URL as <a href="https://github.com/user/repo">https://username:password@github.com/user/repo</a>.
+ This looks scary but if you don't "host" your own (local) .git folder 
+and just pull/push through 'origin' the config file is not going 
+anywhere. <br>
+Alternatively add server, user, pass to ~/.netrc, whatever that path might mean under Cygwin.</p>
+
+<p>Msysgit Git apparently has that resolved, but see comment from sl4m above about changing the slashes to Windows style as:<br>
+git config --system http.sslcainfo \bin\curl-ca-bundle.crt</p>
+
+<p>( Speaking of hosting your own (local) git repo over HTTP with push, 
+pull. I looked at the original C-based code and Ruby code that likely 
+runs Smart HTTP for GItHub and started to put a Python-based version 
+together that you can run without a server of any kind. Just python 
+runtime is needed in addition to ability to start the thing on a command
+ prompt. Look for git_http_backend.py here on GitHub. )</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7689" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/912f09699c7842dc936f891646c73e0c.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/Bobris">Bobris</a></strong>
+      <em class="action-text">
+        <a href="#comment-7689">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7689"><time class="js-relative-date" datetime="2010-05-27T14:51:26-07:00" title="2010-05-27 14:51:26">May 27, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>I had to use:<br>
+git config --system http.sslcainfo \bin/curl-ca-bundle.crt</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7735" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/e5d92e48e175112e9df112e2418bd528.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/kylemcdonald">kylemcdonald</a></strong>
+      <em class="action-text">
+        <a href="#comment-7735">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7735"><time class="js-relative-date" datetime="2010-06-09T11:09:48-07:00" title="2010-06-09 11:09:48">June 09, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>I tried reinstalling Git in C:\Git and then running</p>
+
+<p>git config --system http.sslcainfo \bin/curl-ca-bundle.crt</p>
+
+<p>But I still get the same "error setting cert".</p>
+
+<p>If I push to my fork, everything works ("Everything up-to-date") but 
+when I try pushing to the upstream (of which I'm a collaborator) it 
+gives the error.</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7738" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/bec38d63650c8912b6ba9b557fb953b9.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/rdp">rdp</a></strong>
+      <em class="action-text">
+        <a href="#comment-7738">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7738"><time class="js-relative-date" datetime="2010-06-10T08:04:15-07:00" title="2010-06-10 08:04:15">June 10, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>you could try something like </p>
+
+<p>git config --system http.sslcainfo \bin\curl-ca-bundle.crt</p>
+
+<p>your slashes didn't seem exactly the same...</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-7773" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/d13341fb02e303c6b679f1184b2d81ea.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/banbh">banbh</a></strong>
+      <em class="action-text">
+        <a href="#comment-7773">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-7773"><time class="js-relative-date" datetime="2010-06-15T11:55:46-07:00" title="2010-06-15 11:55:46">June 15, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>FWIW, the <em>mixed slash</em> config:</p>
+
+<pre><code> git config --system http.sslcainfo \bin/curl-ca-bundle.crt
+</code></pre>
+
+<p>worked for me on Windows Server 2008, msysgit 1.7.</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-8080" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/bec38d63650c8912b6ba9b557fb953b9.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/rdp">rdp</a></strong>
+      <em class="action-text">
+        <a href="#comment-8080">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-8080"><time class="js-relative-date" datetime="2010-07-12T16:43:54-07:00" title="2010-07-12 16:43:54">July 13, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>FWIW, I've had some success with using ssh.github.com:443 for accessing it, when HTTPS doesn't work for whatever reason.</p>
+
+<p><a href="http://betterlogic.com/roger/?p=2965">http://betterlogic.com/roger/?p=2965</a></p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-8090" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/4b71cdf53bc76edd1a2ab66c446954b5.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/algal">algal</a></strong>
+      <em class="action-text">
+        <a href="#comment-8090">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-8090"><time class="js-relative-date" datetime="2010-07-13T02:13:23-07:00" title="2010-07-13 02:13:23">July 13, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>If you're getting certificate errors, this page on the curl website goes into the gory details on how you can install certs:</p>
+
+<p><a href="http://curl.haxx.se/docs/sslcerts.html">http://curl.haxx.se/docs/sslcerts.html</a></p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-8238" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/9e255b2da68f16c6ca5cebffc8e68522.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/soumadri">soumadri</a></strong>
+      <em class="action-text">
+        <a href="#comment-8238">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-8238"><time class="js-relative-date" datetime="2010-07-30T12:09:39-07:00" title="2010-07-30 12:09:39">July 30, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>I have a Windows Vista machine. For me the following setting worked fine,</p>
+
+<p>git config --system http.sslcainfo [double backslash]bin[double backslash]curl-ca-bundle.crt</p>
+
+<p>Sorry for using [double backslash], bcoz of Markdown i am not able to use actual  [double backslash]</p>
+
+<p>BTW, the Git installation directory has to be in some "no-space" containing location.</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-8320" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/cf4c33efb83278e9f5bb40434923b044.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/CenterSpace">CenterSpace</a></strong>
+      <em class="action-text">
+        <a href="#comment-8320">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-8320"><time class="js-relative-date" datetime="2010-08-09T13:24:53-07:00" title="2010-08-09 13:24:53">August 09, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>On windows XP.</p>
+
+<p>I was getting this error doing a git push.</p>
+
+<pre><code> error: error setting certificate verify locations:
+ CAfile: /bin/curl-ca-bundle.crt
+ CApath: none
+ while accessing https://me@gethub.com/xxx/xxx.git/info/refs
+</code></pre>
+
+<p>The command:</p>
+
+<pre><code> git config --system http.sslcainfo \bin/curl-ca-bundle.crt
+</code></pre>
+
+<p>fixed the issue.  Thanks guys!</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-8470" class="comment blog-comment github-staff-tag">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/9375a9529679f1b42b567a640d775e7d.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/schacon">schacon</a></strong>
+      <em class="action-text">
+        <a href="#comment-8470">
+        commented
+        </a>
+      </em>
+        <span class="tag">github staff</span>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-8470"><time class="js-relative-date" datetime="2010-08-18T07:45:10-07:00" title="2010-08-18 07:45:10">August 18, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>I just did it:</p>
+
+<pre><code>$ git clone https://github.com/walterjwhite/project.configuration.git
+Cloning into project.configuration...
+remote: Counting objects: 211, done.
+remote: Compressing objects: 100% (211/211), done.
+remote: Total 211 (delta 113), reused 0 (delta 0)
+Receiving objects: 100% (211/211), 44.35 KiB, done.
+Resolving deltas: 100% (113/113), done.
+</code></pre>
+
+<p>So I guess your .netrc is incorrect or something?  Try removing the 
+info from your .netrc and cloning first (since it's a public repo). </p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-8636" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/07426bc321f9f519e7545e650c6cbe3b.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/fbehrens">fbehrens</a></strong>
+      <em class="action-text">
+        <a href="#comment-8636">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-8636"><time class="js-relative-date" datetime="2010-09-01T05:19:02-07:00" title="2010-09-01 05:19:02">September 01, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>I have set the following environment vars (on windows)<br>
+    HTTP_PROXY=<a href="http://rightname.net:8080/">http://rightname.net:8080</a><br>
+    HTTP_PROXY_PASS=secret<br>
+    HTTP_PROXY_USER=me</p>
+
+<p>installing gems is working fine, but when cloning public repos my corpanies firewall complains:<br>
+    C:\open&gt;git clone <a href="https://github.com/RoryO/ruby-net-ldap.git">http://github.com/RoryO/ruby-net-ldap.git</a><br>
+    Initialized empty Git repository in C:/open/ruby-net-ldap/.git/<br>
+    error: The requested URL returned error: 407 while accessing <a href="https://github.com/RoryO/ruby-net-ldap.git/info/refs">http://github.com/RoryO/ruby-net-ldap.git/info/refs</a></p>
+
+<pre><code>fatal: HTTP request failed
+</code></pre>
+
+<p>could find a solution,any help is appreciated, Frank</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-8748" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/123d4ee11b42be017986ff5f100a748d.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/Roni184">Roni184</a></strong>
+      <em class="action-text">
+        <a href="#comment-8748">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-8748"><time class="js-relative-date" datetime="2010-09-16T06:21:22-07:00" title="2010-09-16 06:21:22">September 16, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>is there anyone can guide me to use this site well??</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-8750" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/ba632838edd1ca33baab0ed5b181e370.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/hikari17">hikari17</a></strong>
+      <em class="action-text">
+        <a href="#comment-8750">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-8750"><time class="js-relative-date" datetime="2010-09-16T08:57:36-07:00" title="2010-09-16 08:57:36">September 16, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>I'm seeing the same 443 
+error that others have encountered and haven't yet been able to get the 
+solutions shown here to work. Here are my details:</p>
+
+<p>Using GitforWindows (Git-1.7.2.3-preview20100911)</p>
+
+<p>For the https protocol, I'm entering:<br>
+  git clone <a href="https://github.com/hikari17/appname.git">https://hikari17@github.com/hikari17/appname.git</a></p>
+
+<p>I get back:<br>
+  Cloning into appname...<br>
+  Password:</p>
+
+<p>I enter my password, and get the following error message:<br>
+  error: Failed connect to github.com:443; No error while accessing<br><a href="https://github.com/hikari17/molex_app.git/info/refs">https://hikari17@github.com/hikari17/molex_app.git/info/refs</a><br>
+  fatal: https request failed</p>
+
+<p>Can someone please guide me through setting the needed environment variables in Windows (HTTP_PROXY)?</p>
+
+<p>I haven't even gotten to the point of having the SSL problems others have mentioned yet...</p>
+
+<p>Thanks,</p>
+
+<p>Dean Richardson (hikari17)</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-8984" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/3eced70cd3418b88f0fe9c101048e4ea.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/vorburger">vorburger</a></strong>
+      <em class="action-text">
+        <a href="#comment-8984">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-8984"><time class="js-relative-date" datetime="2010-11-01T04:21:29-07:00" title="2010-11-01 04:21:29">November 01, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>FYI: I propose doc on <a href="http://help.github.com/">http://help.github.com/</a> about this, watch <a href="https://github.com/github/help.github.com/pull/9">http://github.com/github/help.github.com/pull/9</a></p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-9027" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/be0da3f0369d2e8ccad00a36e683a4d1.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/Archeleus">Archeleus</a></strong>
+      <em class="action-text">
+        <a href="#comment-9027">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-9027"><time class="js-relative-date" datetime="2010-11-07T08:51:37-08:00" title="2010-11-07 08:51:37">November 07, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>Well I still prefer to use SSH but cool I guess.</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-9499" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/85d539eec84c83c2e5577211ea336e71.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/exvion">exvion</a></strong>
+      <em class="action-text">
+        <a href="#comment-9499">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-9499"><time class="js-relative-date" datetime="2010-12-14T00:26:39-08:00" title="2010-12-14 00:26:39">December 14, 2010</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>On Win XP 64bit <br>
+$ git --version</p>
+
+<p>git version 1.7.2.3.msysgit.0</p>
+
+<p>$  git config --system http.sslcainfo /bin/curl-ca-bundle.crt</p>
+
+<p>Work well.</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-9661" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/c507dbbdb42f0d55bba25c620cf75314.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/nickknw">nickknw</a></strong>
+      <em class="action-text">
+        <a href="#comment-9661">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-9661"><time class="js-relative-date" datetime="2011-01-13T14:33:34-08:00" title="2011-01-13 14:33:34">January 13, 2011</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>The double backslash version worked to fix the <em>"error setting certificate verify locations"</em> problem for me.</p>
+
+<pre><code>git config --system http.sslcainfo \\bin\\curl-ca-bundle.crt
+</code></pre></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-9874" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/f1bf74a7d412a3b58eb0145dba425939.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/cdotyone">cdotyone</a></strong>
+      <em class="action-text">
+        <a href="#comment-9874">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-9874"><time class="js-relative-date" datetime="2011-02-05T09:25:05-08:00" title="2011-02-05 09:25:05">February 05, 2011</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>On 64bit Windows 7 had to specify full path using DOS short name for Program Files (x86).</p>
+
+<p>git config --system http.sslcainfo c:\Progra~2\Git\bin\curl-ca-bundle.crt</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-9927" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/e990c7cdac81e570939c4d5b17303b42.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/xenoterracide">xenoterracide</a></strong>
+      <em class="action-text">
+        <a href="#comment-9927">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-9927"><time class="js-relative-date" datetime="2011-02-08T20:23:19-08:00" title="2011-02-08 20:23:19">February 09, 2011</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>it seems this doesn't work
+ if I use git:// for url and https:// for pushurl weird... I wonder if 
+it's a known bug... maybe fixed post git 1.7.1</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-10092" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/a708e2ea621c981f6c810eb82f51b0b3.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/phyreman">phyreman</a></strong>
+      <em class="action-text">
+        <a href="#comment-10092">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-10092"><time class="js-relative-date" datetime="2011-02-11T14:57:34-08:00" title="2011-02-11 14:57:34">February 11, 2011</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>I'm running OS X 10.6.6 and I can't seem to clone over https://, only over git:// and here's my Terminal:</p>
+
+<p>sparkedia:git phyreman$ git --version<br>
+git version 1.7.1<br>
+sparkedia:git phyreman$ git clone <a href="https://github.com/jdev19/Netstats.git">https://phyreman@github.com/jdev19/Netstats.git</a><br>
+Initialized empty Git repository in /Users/phyreman/git/Netstats/.git/<br>
+sparkedia:git phyreman$</p>
+
+<p>And that's it. No folder, no errors, nothing. Even when adding -v it doesn't change the output.</p>
+
+<p>*EDIT: I upgraded my Git version to 1.7.4-x86_64 and now it works fine.</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-11445" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/afb9efcde8d8ed988054561472e1ab8f.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/RQuadling">RQuadling</a></strong>
+      <em class="action-text">
+        <a href="#comment-11445">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-11445"><time class="js-relative-date" datetime="2011-04-11T05:50:13-07:00" title="2011-04-11 05:50:13">April 11, 2011</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>Hi.</p>
+
+<p>Getting very lost with git, github and security.</p>
+
+<p>I am in the position that for every git command to my github repo, I have to enter my password.</p>
+
+<p>Not my passphrase, but a shorter password.</p>
+
+<p>I don't know what I'm doing wrong. I normally use TortoiseSVN (I'm on windows) and as such, this "just works" (yes, I know!!!).</p>
+
+<p>I've don't know WHY I have to enter my password (rather than my 
+passphrase). I've tried getting ssh-agent running (I think it is). I've 
+tried getting pageant running (different machine and I think it is).</p>
+
+<p>But I don't know how to prove that either of these services are performing as expected.</p>
+
+<p>I don't know how to see if git is talking to either of these services.</p>
+
+<p>My GIT_SSH env var is appropriately set (well, I think so, but hey, 
+it's not working for me, so I'm probably got it all messed up).</p>
+
+<p>Is there anyone prepared to do some handholding via email so I can get my setup working?</p>
+
+<p>What is odd though, it is only MY repo that asks for a password (the 
+only one I have write access to). The other repos I just clone/pull (I 
+still don't know the difference for what seems to be 2 identical 
+features).</p>
+
+<p>Is there a "Dummy's Guide to Git for SVN users"?</p>
+
+<p>Regards,</p>
+
+<p>Richard "Headless Chicken" Quadling.</p>
+
+<p>P.S. RQuadling at that google emaily thingy.com</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-11499" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/e6c6e133e74c3b83f04d2861deaa1c20.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/searls">searls</a></strong>
+      <em class="action-text">
+        <a href="#comment-11499">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-11499"><time class="js-relative-date" datetime="2011-04-12T12:08:22-07:00" title="2011-04-12 12:08:22">April 12, 2011</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>For folks looking to save 
+their password in a .netrc file on Windows, this is possible. Running 
+Git Bash in Windows, you can create a .netrc file just like in Unix, but
+ the trick is to name it <strong>_netrc</strong>.</p>
+
+<p>So if <code>cat "$HOME/_netrc"</code> reads:</p>
+
+<pre><code>machine github.com login your_github_login password your_password
+</code></pre>
+
+<p>(as mentioned elsewhere, your repository's .git/config remote url has needs to <em>exclude</em> <strong>your_github_login@</strong> from the URL for _netrc to be looked up.)</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-11819" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/5b51fd601b60183c50d0850d825988f0.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/legendbb">legendbb</a></strong>
+      <em class="action-text">
+        <a href="#comment-11819">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-11819"><time class="js-relative-date" datetime="2011-04-26T13:26:39-07:00" title="2011-04-26 13:26:39">April 26, 2011</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>doesn't seem to work for me.<br>
+SSH from corporate network, could not get ssh server packet from github. Guess it's our firewall.<br>
+On Windows7 x32, <br>
+$ git clone <a href="https://github.com/username/gitname.git">https://username@github.com/username/gitname.git</a><br>
+works</p>
+
+<p>$ git remote add origin <a href="https://github.com/username/gitname.git">https://username@github.com/username/gitname.git</a><br>
+fatal: remote origin already exists. (That's how I created on github and cloned from)</p>
+
+<p>$ git push origin master<br>
+Password: *************<br>
+fatal: Authentication failed<br>
+Used wireshark, there are bunch of SMB packets between my machine and 
+our gateway. Communication with github is a few, don't know what they 
+contain https [FIN, ACK]</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-11860" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/cf94ff677e4fed2bcaae478f75dc89dc.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/n8v">n8v</a></strong>
+      <em class="action-text">
+        <a href="#comment-11860">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-11860"><time class="js-relative-date" datetime="2011-04-27T15:29:31-07:00" title="2011-04-27 15:29:31">April 28, 2011</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>I was having all sorts of 
+trouble pushing back to my r (Windows/msysgit/cygwin behind a 
+proxy/corporate firewall) and it turned out to be BECAUSE MY PASSWORD 
+CONTAINED A COLON.  Maybe, it would be nice if GitHub prevented colons 
+in passwords?</p>
+
+<p>Anyway, thanks to everyone who left clues in these comments. Crucial steps included:</p>
+
+<ul>
+<li>Setting the <code>https_proxy</code> environment</li>
+<li>
+<code>_netrc</code> file with an UNDERSCORE. This is especially 
+important because Cygwin terminals won't prompt for username/password, 
+even using msysgit (you can see the prompts by using <code>cmd.exe</code>).</li>
+<li>no username in URL</li>
+</ul><p>Cloning seems a lot more forgiving than pushing (as it should 
+be). You don't have to reclone to change the URL though-- you can just 
+change the URL</p>
+
+<p><code>git remote set-url origin https://github.com/username/project.git</code></p>
+
+<p>and view it with </p>
+
+<p><code>git remote show origin</code></p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-12164" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/32bad9b69d95c7945eeacdb8b793ce59.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/alnutaifi">alnutaifi</a></strong>
+      <em class="action-text">
+        <a href="#comment-12164">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-12164"><time class="js-relative-date" datetime="2011-05-24T21:53:52-07:00" title="2011-05-24 21:53:52">May 25, 2011</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>setting : </p>
+
+<pre><code>git config --system http.sslcainfo /bin/curl-ca-bundle.crt
+</code></pre>
+
+<p>resolved the problem for me, </p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-12166" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/ae7eed65e46234c210912a1e474f2f1c.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/soofaloofa">soofaloofa</a></strong>
+      <em class="action-text">
+        <a href="#comment-12166">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-12166"><time class="js-relative-date" datetime="2011-05-25T06:37:29-07:00" title="2011-05-25 06:37:29">May 25, 2011</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p><a href="https://github.com/fbehrens" class="user-mention">@fbehrens</a></p>
+
+<p>Try setting your login and proxy through the git config:</p>
+
+<p>git config --global http.proxy <a href="http://our-proxy-server:8080/">http://login:password@our-proxy-server:8080</a></p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-12400" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/0193e3cb5b0b5d8e206db49c36a8d97d.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/mberubenet">mberubenet</a></strong>
+      <em class="action-text">
+        <a href="#comment-12400">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-12400"><time class="js-relative-date" datetime="2011-06-08T06:38:46-07:00" title="2011-06-08 06:38:46">June 08, 2011</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p><a href="https://github.com/CenterSpace" class="user-mention">@CenterSpace</a></p>
+
+<p>Thanks for the hint, it solve my problem.</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-12511" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/db4b131b1b1519a5a22f84b1e8737f9b.jpeg" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/markheath">markheath</a></strong>
+      <em class="action-text">
+        <a href="#comment-12511">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-12511"><time class="js-relative-date" datetime="2011-06-21T02:19:10-07:00" title="2011-06-21 02:19:10">June 21, 2011</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p>Is it possible to use this for pushing to gists? I can't seem to get it to work</p></div>
+    </div>
+  </div>
+</div>
+
+          
+<div id="comment-13112" class="comment blog-comment">
+  <div class="cmeta">
+    <p class="author">
+        <span class="gravatar"><img src="642-smart-http-support-Dateien/f09f0a0d45c19276540a9899d0e6b667.png" width="20" height="20"></span>
+      <strong class="author"><a href="https://github.com/rip747">rip747</a></strong>
+      <em class="action-text">
+        <a href="#comment-13112">
+        commented
+        </a>
+      </em>
+    </p>
+    <p class="info">
+      <em class="date"><a href="#comment-13112"><time class="js-relative-date" datetime="2011-07-21T05:57:43-07:00" title="2011-07-21 05:57:43">July 21, 2011</time></a></em>
+        <span class="icon"></span>
+    </p>
+  </div>
+
+
+  <div class="body">
+    <div class="formatted-content">
+      <div class="content-body wikistyle "><p><a href="https://github.com/n8v" class="user-mention">@n8v</a>, <a href="https://github.com/searls" class="user-mention">@searls</a></p>
+
+<p>you both rock. following your hints, i finally got portablegit 
+working on windows with github. thank you both. it's so nice now not 
+having to rely on putty at work.</p></div>
+    </div>
+  </div>
+</div>
+
+
+          Comments are closed on this post. If you are having trouble with the site, please contact <a href="mailto:support@github.com">support@github.com</a>.
+      </div>
+    </ul>
+  </div>
+  
+<div class="sidebar">
+  <div id="rss">
+    <a href="https://github.com/blog.atom"><img alt="RSS Feed" src="642-smart-http-support-Dateien/rss.png"></a>
+    <h3><a href="https://github.com/blog.atom">Subscribe to the GitHub Blog</a></h3>
+    <p>Never miss a new feature and always know about scheduled maintenance.</p>
+  </div>
+
+  <div class="others">
+    <ul>
+      <li>
+        <div><a href="https://github.com/blog/broadcasts">Broadcasts</a></div>
+        <div class="meta">New features &amp; announcements</div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="others">
+      
+<div style="visibility: visible;" class="github-jobs-promotion" url="https://jobs.github.com/widget.js?callback=jobsWidgetCallback">
+  <p>
+    <a class="job-link" href="http://jobs.github.com/positions/b3787c14-fb65-11e0-8af9-f3cf677ad8ab" target="_blank">
+      <strong class="job-company">DISQUS</strong> is hiring:
+      <strong class="job-position">Software Engineer - Core JavaScript</strong> in
+      <span class="job-location">San Francisco, CA, US</span>
+    </a>
+  </p>
+  <a href="http://jobs.github.com/" target="_blank" class="jobs-logo">Brought to you by <strong>github:jobs</strong></a>
+</div>
+
+
+  </div>
+
+  <div class="others">
+    <ul>
+        <li>
+          <div><a href="https://github.com/blog/975-gitpad-write-your-commits-in-notepad" rel="bookmark">GitPad: Write your commits in Notepad</a></div>
+          <div class="meta">xpaulbettsx on Oct 27</div>
+        </li>
+        <li>
+          <div><a href="https://github.com/blog/973-jake-boxer-is-a-githubber" rel="bookmark">Jake Boxer is a GitHubber</a></div>
+          <div class="meta">defunkt on Oct 26</div>
+        </li>
+        <li>
+          <div><a href="https://github.com/blog/968-say-hello-to-hubot" rel="bookmark">Say Hello to Hubot</a></div>
+          <div class="meta">atmos on Oct 25</div>
+        </li>
+        <li>
+          <div><a href="https://github.com/blog/971-github-drinkup-in-chicago" rel="bookmark">GitHub Drinkup in Chicago</a></div>
+          <div class="meta">matthewmccullough on Oct 24</div>
+        </li>
+        <li>
+          <div><a href="https://github.com/blog/972-lee-reilly-is-a-githubber" rel="bookmark">Lee Reilly is a GitHubber</a></div>
+          <div class="meta">pjhyett on Oct 24</div>
+        </li>
+        <li>
+          <div><a href="https://github.com/blog/969-first-annual-octocat-dodgeball-tournament-a-success" rel="bookmark">First Annual Octocat Dodgeball Tournament a Success!</a></div>
+          <div class="meta">schacon on Oct 24</div>
+        </li>
+        <li>
+          <div><a href="https://github.com/blog/967-github-secrets" rel="bookmark">GitHub Secrets</a></div>
+          <div class="meta">holman on Oct 21</div>
+        </li>
+        <li>
+          <div><a href="https://github.com/blog/966-improved-subversion-client-support" rel="bookmark">Improved Subversion Client Support</a></div>
+          <div class="meta">nickh on Oct 20</div>
+        </li>
+        <li>
+          <div><a href="https://github.com/blog/965-zend-studio-github" rel="bookmark">Zend Studio + GitHub</a></div>
+          <div class="meta">kneath on Oct 19</div>
+        </li>
+        <li>
+          <div><a href="https://github.com/blog/964-all-of-the-hooks" rel="bookmark">All of the Hooks</a></div>
+          <div class="meta">technoweenie on Oct 19</div>
+        </li>
+        <li>
+          <div><a href="https://github.com/blog/963-nick-hengeveld-is-a-githubber" rel="bookmark">Nick Hengeveld is a GitHubber</a></div>
+          <div class="meta">schacon on Oct 18</div>
+        </li>
+        <li>
+          <div><a href="https://github.com/blog/962-first-annual-octocat-dodgeball-invitational" rel="bookmark">First Annual Octocat Dodgeball Invitational</a></div>
+          <div class="meta">kamzilla on Oct 14</div>
+        </li>
+        <li>
+          <div><a href="https://github.com/blog/961-deploy-to-appharbor-from-github" rel="bookmark">Deploy to AppHarbor from GitHub</a></div>
+          <div class="meta">xpaulbettsx on Oct 13</div>
+        </li>
+        <li>
+          <div><a href="https://github.com/blog/960-github-drinkup-tokyo-%E9%A3%B2%E3%81%BF%E6%94%BE%E9%A1%8C" rel="bookmark">GitHub Drinkup, Tokyo (飲み放題!!)</a></div>
+          <div class="meta">alexwilliamsca on Oct 13</div>
+        </li>
+        <li>
+          <div><a href="https://github.com/blog/959-issues-dashboard-for-organizations" rel="bookmark">Issues Dashboard for Organizations</a></div>
+          <div class="meta">brianmario on Oct 12</div>
+        </li>
+    </ul>
+  </div>
+</div>
+
+</div></div>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <div id="footer">
+      
+  <div class="upper_footer">
+     <div class="site">
+
+       <!--[if IE]><h4 id="blacktocat_ie">GitHub Links</h4><![endif]-->
+       <!--[if !IE]--><h4 id="blacktocat">GitHub Links</h4><!--[endif]-->
+
+       <ul class="footer_nav">
+         <h4>GitHub</h4>
+         <li><a href="https://github.com/about">About</a></li>
+         <li><a href="https://github.com/blog">Blog</a></li>
+         <li><a href="https://github.com/features">Features</a></li>
+         <li><a href="https://github.com/contact">Contact &amp; Support</a></li>
+         <li><a href="https://github.com/training">Training</a></li>
+         <li><a href="http://status.github.com/">Site Status</a></li>
+       </ul>
+
+       <ul class="footer_nav">
+         <h4>Tools</h4>
+         <li><a href="http://mac.github.com/">GitHub for Mac</a></li>
+         <li><a href="http://mobile.github.com/">Issues for iPhone</a></li>
+         <li><a href="https://gist.github.com/">Gist: Code Snippets</a></li>
+         <li><a href="http://fi.github.com/">Enterprise Install</a></li>
+         <li><a href="http://jobs.github.com/">Job Board</a></li>
+       </ul>
+
+       <ul class="footer_nav">
+         <h4>Extras</h4>
+         <li><a href="http://shop.github.com/">GitHub Shop</a></li>
+         <li><a href="http://octodex.github.com/">The Octodex</a></li>
+       </ul>
+
+       <ul class="footer_nav">
+         <h4>Documentation</h4>
+         <li><a href="http://help.github.com/">GitHub Help</a></li>
+         <li><a href="http://developer.github.com/">Developer API</a></li>
+         <li><a href="http://github.github.com/github-flavored-markdown/">GitHub Flavored Markdown</a></li>
+         <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+       </ul>
+
+     </div><!-- /.site -->
+  </div><!-- /.upper_footer -->
+
+<div class="lower_footer">
+  <div class="site">
+    <!--[if IE]><div id="legal_ie"><![endif]-->
+    <!--[if !IE]--><div id="legal"><!--[endif]-->
+      <ul>
+          <li><a href="https://github.com/site/terms">Terms of Service</a></li>
+          <li><a href="https://github.com/site/privacy">Privacy</a></li>
+          <li><a href="https://github.com/security">Security</a></li>
+      </ul>
+
+      <p>© 2011 <span id="_rrt" title="0.51096s from fe7.rs.github.com">GitHub</span> Inc. All rights reserved.</p>
+    </div><!-- /#legal or /#legal_ie-->
+
+      <div class="sponsor">
+        <a href="http://www.rackspace.com/" class="logo">
+          <img alt="Dedicated Server" src="642-smart-http-support-Dateien/rackspace_logo.png" width="38" height="36">
+        </a>
+        Powered by the <a href="http://www.rackspace.com/">Dedicated
+        Servers</a> and<br> <a href="http://www.rackspacecloud.com/">Cloud
+        Computing</a> of Rackspace Hosting<span>®</span>
+      </div>
+  </div><!-- /.site -->
+</div><!-- /.lower_footer -->
+
+    </div><!-- /#footer -->
+
+    
+
+<div id="keyboard_shortcuts_pane" class="instapaper_ignore readability-extra" style="display: none;">
+  <h2>Keyboard Shortcuts <small><a href="#" class="js-see-all-keyboard-shortcuts">(see all)</a></small></h2>
+
+  <div class="columns threecols">
+    <div class="column first">
+      <h3>Site wide shortcuts</h3>
+      <dl class="keyboard-mappings">
+        <dt>s</dt>
+        <dd>Focus site search</dd>
+      </dl>
+      <dl class="keyboard-mappings">
+        <dt>?</dt>
+        <dd>Bring up this help dialog</dd>
+      </dl>
+    </div><!-- /.column.first -->
+
+    <div class="column middle" style="">
+      <h3>Commit list</h3>
+      <dl class="keyboard-mappings">
+        <dt>j</dt>
+        <dd>Move selection down</dd>
+      </dl>
+      <dl class="keyboard-mappings">
+        <dt>k</dt>
+        <dd>Move selection up</dd>
+      </dl>
+      <dl class="keyboard-mappings">
+        <dt>c <em>or</em> o <em>or</em> enter</dt>
+        <dd>Open commit</dd>
+      </dl>
+      <dl class="keyboard-mappings">
+        <dt>y</dt>
+        <dd>Expand URL to its canonical form</dd>
+      </dl>
+    </div><!-- /.column.first -->
+
+    <div class="column last" style="">
+      <h3>Pull request list</h3>
+      <dl class="keyboard-mappings">
+        <dt>j</dt>
+        <dd>Move selection down</dd>
+      </dl>
+      <dl class="keyboard-mappings">
+        <dt>k</dt>
+        <dd>Move selection up</dd>
+      </dl>
+      <dl class="keyboard-mappings">
+        <dt>o <em>or</em> enter</dt>
+        <dd>Open issue</dd>
+      </dl>
+    </div><!-- /.columns.last -->
+
+  </div><!-- /.columns.equacols -->
+
+  <div style="">
+    <div class="rule"></div>
+
+    <h3>Issues</h3>
+
+    <div class="columns threecols">
+      <div class="column first">
+        <dl class="keyboard-mappings">
+          <dt>j</dt>
+          <dd>Move selection down</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>k</dt>
+          <dd>Move selection up</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>x</dt>
+          <dd>Toggle selection</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>o <em>or</em> enter</dt>
+          <dd>Open issue</dd>
+        </dl>
+      </div><!-- /.column.first -->
+      <div class="column middle">
+        <dl class="keyboard-mappings">
+          <dt>I</dt>
+          <dd>Mark selection as read</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>U</dt>
+          <dd>Mark selection as unread</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>e</dt>
+          <dd>Close selection</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>y</dt>
+          <dd>Remove selection from view</dd>
+        </dl>
+      </div><!-- /.column.middle -->
+      <div class="column last">
+        <dl class="keyboard-mappings">
+          <dt>c</dt>
+          <dd>Create issue</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>l</dt>
+          <dd>Create label</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>i</dt>
+          <dd>Back to inbox</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>u</dt>
+          <dd>Back to issues</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>/</dt>
+          <dd>Focus issues search</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <div style="">
+    <div class="rule"></div>
+
+    <h3>Issues Dashboard</h3>
+
+    <div class="columns threecols">
+      <div class="column first">
+        <dl class="keyboard-mappings">
+          <dt>j</dt>
+          <dd>Move selection down</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>k</dt>
+          <dd>Move selection up</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>o <em>or</em> enter</dt>
+          <dd>Open issue</dd>
+        </dl>
+      </div><!-- /.column.first -->
+    </div>
+  </div>
+
+  <div style="">
+    <div class="rule"></div>
+
+    <h3>Network Graph</h3>
+    <div class="columns equacols">
+      <div class="column first">
+        <dl class="keyboard-mappings">
+          <dt><span class="badmono">←</span> <em>or</em> h</dt>
+          <dd>Scroll left</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt><span class="badmono">→</span> <em>or</em> l</dt>
+          <dd>Scroll right</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt><span class="badmono">↑</span> <em>or</em> k</dt>
+          <dd>Scroll up</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt><span class="badmono">↓</span> <em>or</em> j</dt>
+          <dd>Scroll down</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>t</dt>
+          <dd>Toggle visibility of head labels</dd>
+        </dl>
+      </div><!-- /.column.first -->
+      <div class="column last">
+        <dl class="keyboard-mappings">
+          <dt>shift <span class="badmono">←</span> <em>or</em> shift h</dt>
+          <dd>Scroll all the way left</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>shift <span class="badmono">→</span> <em>or</em> shift l</dt>
+          <dd>Scroll all the way right</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>shift <span class="badmono">↑</span> <em>or</em> shift k</dt>
+          <dd>Scroll all the way up</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>shift <span class="badmono">↓</span> <em>or</em> shift j</dt>
+          <dd>Scroll all the way down</dd>
+        </dl>
+      </div><!-- /.column.last -->
+    </div>
+  </div>
+
+  <div style="">
+    <div class="rule"></div>
+    <div class="columns threecols">
+      <div class="column first" style="">
+        <h3>Source Code Browsing</h3>
+        <dl class="keyboard-mappings">
+          <dt>t</dt>
+          <dd>Activates the file finder</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>l</dt>
+          <dd>Jump to line</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>w</dt>
+          <dd>Switch branch/tag</dd>
+        </dl>
+        <dl class="keyboard-mappings">
+          <dt>y</dt>
+          <dd>Expand URL to its canonical form</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div id="markdown-help" class="instapaper_ignore readability-extra">
+  <h2>Markdown Cheat Sheet</h2>
+
+  <div class="cheatsheet-content">
+
+  <div class="mod">
+    <div class="col">
+      <h3>Format Text</h3>
+      <p>Headers</p>
+      <pre># This is an &lt;h1&gt; tag
+## This is an &lt;h2&gt; tag
+###### This is an &lt;h6&gt; tag</pre>
+     <p>Text styles</p>
+     <pre>*This text will be italic*
+_This will also be italic_
+**This text will be bold**
+__This will also be bold__
+
+*You **can** combine them*
+</pre>
+    </div>
+    <div class="col">
+      <h3>Lists</h3>
+      <p>Unordered</p>
+      <pre>* Item 1
+* Item 2
+  * Item 2a
+  * Item 2b</pre>
+     <p>Ordered</p>
+     <pre>1. Item 1
+2. Item 2
+3. Item 3
+   * Item 3a
+   * Item 3b</pre>
+    </div>
+    <div class="col">
+      <h3>Miscellaneous</h3>
+      <p>Images</p>
+      <pre>![GitHub Logo](/images/logo.png)
+Format: ![Alt Text](url)
+</pre>
+     <p>Links</p>
+     <pre>http://github.com - automatic!
+[GitHub](http://github.com)</pre>
+<p>Blockquotes</p>
+     <pre>As Kanye West said:
+&gt; We're living the future so
+&gt; the present is our past.
+</pre>
+    </div>
+  </div>
+  <div class="rule"></div>
+
+  <h3>Code Examples in Markdown</h3>
+  <div class="col">
+      <p>Syntax highlighting with <a href="http://github.github.com/github-flavored-markdown/" title="GitHub Flavored Markdown" target="_blank">GFM</a></p>
+      <pre>```javascript
+function fancyAlert(arg) {
+  if(arg) {
+    $.facebox({div:'#foo'})
+  }
+}
+```</pre>
+    </div>
+    <div class="col">
+      <p>Or, indent your code 4 spaces</p>
+      <pre>Here is a Python code example
+without syntax highlighting:
+
+    def foo:
+      if not bar:
+        return true</pre>
+    </div>
+    <div class="col">
+      <p>Inline code for comments</p>
+      <pre>I think you should use an
+`&lt;addr&gt;` element here instead.</pre>
+    </div>
+  </div>
+
+  </div>
+
+
+    <div class="context-overlay"></div>
+
+    
+    
+    
+  </body></html>
