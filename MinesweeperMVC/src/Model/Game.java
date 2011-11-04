@@ -2,9 +2,6 @@ package Model;
 
 import java.util.Collections;
 import java.util.Stack;
-
-
-
 import Model.GameAdministration;
 import Model.Square;
 
@@ -64,6 +61,7 @@ public class Game {
 //creates shuffled Stack of Mines for a game Area
 
 	public void createMinenfield() {
+		
 		for (int i = 0; i < squares; i++) {
 			if (i < this.mines) {
 				minefield.add(true);

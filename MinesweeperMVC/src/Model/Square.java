@@ -55,7 +55,6 @@ public class Square {
 		this.setSquareText(squareText);
 		this.game.addToChangedSquares(this);
 		this.game.setOpenSquares(this.game.getOpenSquares()+1);
-		System.out.println(game.getOpenSquares());
 	}
 	
 	public void getChecked(boolean aufrufDurchKlick) {
@@ -69,7 +68,7 @@ public class Square {
 								getAtY);
 						if (untersuchtesFeld.isMine() == true && this.tested ==false) {
 							this.surroundingMines = this.surroundingMines + 1;
-						} else if (!aufrufDurchKlick && this.surroundingMines == 0 && this.tested == true){
+						} else if (!aufrufDurchKlick && this.surroundingMines.equals(0) && this.tested){
 								if(untersuchtesFeld.isMine() == false && untersuchtesFeld.isEnabled()==true && untersuchtesFeld.isTested() == false){
 									untersuchtesFeld.reactOnClick();
 							}

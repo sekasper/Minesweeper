@@ -10,10 +10,12 @@ import javax.swing.JPanel;
 
 //import spiel.Spielfeld;
 import Controller.GameController;
-public class GameWindow extends JFrame {
 
-	// public GameController creates GameWindow with buttons and coordinates;
-	// public Vector show changes;
+/**
+ * @author seka
+ *Spielfenster für die Darstellung des Spiels
+ */
+public class GameWindow extends JFrame {
 
 	private GameButton[][] buttons;
 	private JLabel bild1;
@@ -28,17 +30,8 @@ public class GameWindow extends JFrame {
 	private GameController gameContr;
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * 
-	 */
-
-	/**
-	 * 
-	 * 
-	 * @param kantenlaengeX
-	 *            jkgkg
-	 * @param kantenlaengeY
-	 */
+//Fenster erstellen. Das Fenster bildet das Spielfeld aus Game ab. Zur Kommunikation von Änderungen an den GameController werden MouseListener eingebunden.
+	
 	public GameWindow(GameController gameContr, String bezeichnung, Integer kantenlaengeX, Integer kantenlaengeY) {
 		super(bezeichnung);
 		this.gameContr = gameContr;
@@ -91,6 +84,8 @@ public class GameWindow extends JFrame {
 		this.setResizable(false);
 	}
 
+//	Methoden für die Darstellung der Statusbilder. 
+	
 	public void youLoseImage() {
 		this.bild1.setIcon(new ImageIcon("Images/explosion.jpg"));
 		this.bild2.setIcon(new ImageIcon("Images/explosion.jpg"));
@@ -108,6 +103,7 @@ public class GameWindow extends JFrame {
 		this.bild2.setIcon(new ImageIcon("Images/soldier-smiley.png"));
 		this.setVisible(true);
 	}
+//getter & setter
 	
 	public GameButton getButton(Integer x, Integer y){
 	return buttons[x][y];

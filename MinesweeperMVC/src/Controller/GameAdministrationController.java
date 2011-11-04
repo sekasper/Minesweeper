@@ -40,7 +40,7 @@ public class GameAdministrationController {
 			Integer minen = new Integer(this.administrationWindow.getMines().getText());
 			boolean isValid = administration.validateInput(kanteX, kanteY, minen);
 			if (isValid) {
-				IGamekonfig konfig = administration.getKonfiguration(kanteX, kanteY, minen);
+				IGamekonfig konfig = administration.defineKonfiguration(kanteX, kanteY, minen);
 				Game game = this.administration.createGame(konfig, minen);
 				new GameController(game);
 			}
@@ -48,28 +48,4 @@ public class GameAdministrationController {
 		}
 
 	}
-
-	public void handleResetButtonEvent() {
-
-	}
-
-	public void createSpielcontroller() {
-
-	}
-
-	public void startGame() {
-	}
-
-	public void restartGame() {
-	}
-
-	public void GameAdinistrationController() {
-	}
-
-	public void getNewGameProperties() {
-	}
-
-	public void Validate() {
-	}
-
 }

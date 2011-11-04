@@ -8,14 +8,8 @@ package Model;
  *
  */
 public class GamekonfigValidator {
-	public static boolean validateKantenlaengeX(Integer kanteX) {
-		if(kanteX>10 || kanteX<4){
-			return false;
-		}
-		else return true;
-	}
-	public static boolean validateKantenlaengeY(Integer kanteY){
-		if(kanteY>10 || kanteY<4){
+	public static boolean validateKantenlaenge(Integer kante) {
+		if(kante>=20 || kante<4){//evl eigene Klasse für Wertegrenzen (in Verbindung mit dem IGamekonfig)
 			return false;
 		}
 		else return true;
